@@ -287,7 +287,7 @@ class LoadStreams:  # multiple IP or RTSP cameras
             self.fps = cap.get(cv2.CAP_PROP_FPS) % 100
 
             _, self.imgs[i] = cap.read()  # guarantee first frame
-            thread = Thread(target=self.update, args=([i, cap]), daemon=True)
+            thread = Thread(target=self.update, args=([i, cap]), daemon=True)#i, cap
             print(f' success ({w}x{h} at {self.fps:.2f} FPS).')
             thread.start()
         print('')  # newline
@@ -310,6 +310,8 @@ class LoadStreams:  # multiple IP or RTSP cameras
                 self.imgs[index] = im if success else self.imgs[index] * 0
                 n = 0
             time.sleep(1 / self.fps)  # wait time
+
+
 
     def __iter__(self):
         self.count = -1
